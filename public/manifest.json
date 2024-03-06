@@ -1,0 +1,19 @@
+{
+    "manifest_version": 3,
+    "name": "Pick LeetCode",
+    "description": "Extension that allows you to pick random LeetCode problems to help you study",
+    "version": "1.0",
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "permissions": [
+      "tabs",
+      "cookies"
+    ],
+    "content_scripts": [
+      {
+        "matches": ["https://leetcode.com/problemset/"],
+        "js": ["scripts/contentScript.js"]
+      }
+    ]
+  }

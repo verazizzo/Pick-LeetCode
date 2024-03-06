@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="popup.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <p style="position: center; color: orangered; font-size: 20px; font-weight: 700;">Pick LeetCode</p>
+        <p style="font-size: 15px;">Choose your random LeetCode!</p>
+        <p style="font-size: 15px;">Filters:</p>
+        <form id="myForm">
+            <div>
+                <label for="Difficulty">Select Difficulty</label>
+                <select multiple name="Difficulty" id="Difficulty">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+            </div>
+
+            <br>
+
+            <div>
+                <label for="Status">Select Status</label>
+                <select multiple name="Status">
+                    <option value="ac">Solved</option>
+                    <option value="notac">Attempted</option>
+                    <option value="null">Not Attempted</option>
+                </select>
+            </div>
+
+            <br>
+
+            <label for="Premium">Premium subscription</label>
+            <label class="switch">
+                <input type="checkbox" name="Premium" value="Premium">
+                <span class="slider round"></span>
+            </label>
+
+            <br>
+
+            <label for="numberOfLeetcode">How many LeetCode do you want to do?</label>
+            <input type="number" name="numberOfLeetcode" min="1" value="1">
+
+            <br>
+
+            <div id="Topics">
+                <label for="Topics">Select Topics:</label>
+                <br>
+                
+            </div>
+
+            <br>
+
+            <div>
+                <button type="reset">Reset</button>
+                <button type="submit" value="Submit">Submit</button>
+            </div>
+        </form>
+    </body>
+    <script src="scripts/popup.js"></script>     
+</html>
