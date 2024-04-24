@@ -67,10 +67,11 @@ async function submitHandler( e: SubmitEvent) {
 
 async function sendMessage(formData : formQuestions){
     const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true})
-    const response = await chrome.tabs.sendMessage(tab.id ? tab.id : chrome.tabs.TAB_ID_NONE, {formData});
+    const response_contentS = await chrome.tabs.sendMessage(tab.id ? tab.id : chrome.tabs.TAB_ID_NONE, {formData});
+    const response_serviceW = await chrome.runtime.sendMessage({formData});
 }
 
 
 document.getElementById("myForm")?.addEventListener("submit", (e)=>submitHandler(e))
 createTopicsFilters()
-// TODO: save form preferences
+//TODO: show form preferences on popup.html

@@ -31,7 +31,7 @@ chrome.runtime.onMessage.addListener(
         formQuestion = request.formData as formQuestions
         console.log(formQuestion)
         let filteredQ = filterQuestions(questions, formQuestion)
-        console.log(filteredQ)
+        console.log(filteredQ) 
         pickRandom(filteredQ, formQuestion.numberOfLeetcode)
     } //TODO: fix edge cases
 );
@@ -40,5 +40,5 @@ chrome.runtime.onMessage.addListener(
 let questions : Array<any>
 fetchQuestions().then(output => {
     questions = output
-    console.log(output)
+    console.log(output) //all the Leetcode Problems
 })
