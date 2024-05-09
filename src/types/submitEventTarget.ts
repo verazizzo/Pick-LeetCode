@@ -1,7 +1,7 @@
-export type eventTarget = {
+export type submitEventTarget = {
     Difficulty: HTMLFormElement;
     Status: HTMLFormElement;
     Premium: HTMLFormElement;
     numberOfLeetcode: HTMLFormElement;
-    Topics: NodeListOf<HTMLFormElement>
+    Topics: HTMLFormElement
 }
