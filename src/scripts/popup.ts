@@ -2,7 +2,6 @@ import { formQuestions } from "../types/formQuestions";
 import { submitEventTarget } from "../types/submitEventTarget";
 import { tagList } from "../tagList";
 
-
 function createTopicsFilters (){
     tagList.forEach(tagName => {
         let option = document.createElement("option")
@@ -103,13 +102,61 @@ function changeHandler(e: Event){
         chekAllSlected(changeEventTarget)
     }
     lastSelectAll = changeEventTarget.options.item(0).selected
-    console.log(changeEventTarget.selectedOptions)
 }
+
+function showSavedPreferences(formQuestion: formQuestions){
+    let difficulty = document.getElementById("Difficulty") as HTMLFormElement
+    for (let i = 0; i < formQuestion.Difficulty.length; i++){
+        if (formQuestion.Difficulty[i] == "Easy"){
+            difficulty.options.item(0).selected = true
+        } else if (formQuestion.Difficulty[i] == "Medium"){
+            difficulty.options.item(1).selected = true
+        } else if (formQuestion.Difficulty[i] == "Hard"){
+            difficulty.options.item(2).selected = true
+        }
+    }
+    M.FormSelect.init(difficulty)
+    let status = document.getElementById("Status") as HTMLFormElement
+    for (let i = 0; i < formQuestion.Status.length; i++){
+        if (formQuestion.Status[i] == "ac"){
+            status.options.item(0).selected = true
+        } else if (formQuestion.Status[i] == "notac"){
+            status.options.item(1).selected = true
+        } else if (formQuestion.Status[i] == null){
+            status.options.item(2).selected = true
+        }
+    }
+    M.FormSelect.init(status)
+    let premium = document.getElementById("Premium") as HTMLFormElement
+    if(formQuestion.Premium == true){
+        premium.checked = true
+    } else {
+        premium.checked = false
+    }
+    let numberOfLeetcode = document.getElementById("numberOfLeetcode") as HTMLFormElement
+    numberOfLeetcode.value = formQuestion.numberOfLeetcode
+    let topics = document.getElementById("Topics") as HTMLFormElement
+    for (let i = 0; i < formQuestion.Topics.length; i++){
+        for (let j = 0; j < tagList.length; j++){
+            if (formQuestion.Topics[i] == tagList[j]){
+                topics.options.item(j+1).selected = true
+            }
+        }
+    }
+    M.FormSelect.init(topics)
+}
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        let formQuestion = request.formQuestion as formQuestions
+        showSavedPreferences(formQuestion)
+        console.log(formQuestion)
+    }
+);
 
 let lastSelectAll = false
 
 createTopicsFilters()
+chrome.runtime.sendMessage("open")
 document.getElementById("myForm")?.addEventListener("submit", (e)=>submitHandler(e))
 document.getElementById("Topics")?.addEventListener("change", (e)=>changeHandler(e))
-
-//TODO: show form preferences on popup.html

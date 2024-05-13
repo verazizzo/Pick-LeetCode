@@ -1,26 +1,24 @@
 import { formQuestions } from "../types/formQuestions";
 
-let formQuestion : formQuestions
+function getValues(){
+    chrome.storage.local.get(["formValue"]).then((result) => {
+        let formQuestion = result.formValue as formQuestions
+        sendMessage(formQuestion).catch(err=>console.log(err)).then((res)=>console.log(res));
+    });
+}
 
-//Message listener, saves prefereces in the storage
+async function sendMessage(formQuestion : formQuestions){
+    const response_popup = await chrome.runtime.sendMessage({formQuestion});
+}
+
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        formQuestion = request.formData as formQuestions
-        //console.log(formQuestion)
-        chrome.storage.local.set({"formValues": formQuestion}, () => {
-        });
+        if (request == "open"){
+            getValues()
+        } else{
+            let formData = request.formData as formQuestions
+            chrome.storage.local.set({"formValue": formData}, () => {
+            });
+        }
     }
 );
-
-
-//listener of the changes in the storage
-chrome.storage.onChanged.addListener((changes, namespace) => {
-    chrome.storage.local.get(["formValue"]).then((result) => {
-        console.log("Value is " + result.key);
-    });
-});
-
-//retrive at key "formValue"
-chrome.storage.local.get(["formValue"]).then((result) => {
-    console.log(result);
-});

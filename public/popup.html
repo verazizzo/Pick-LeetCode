@@ -12,7 +12,9 @@
         <p style="position: center; color: orangered; font-size: 25px; font-weight: 700;">Pick LeetCode</p>
         <p style="font-size: 18px; color: rgb(85, 85, 85)">Choose your random LeetCode!</p>
         <p style="font-size: 18px; color: rgb(85, 85, 85)">Filters:</p>
+        
         <form id="myForm">
+
             <div>
                 <label for="Difficulty">Select Difficulty</label>
                 <select multiple name="Difficulty" id="Difficulty">
@@ -26,7 +28,7 @@
 
             <div>
                 <label for="Status">Select Status</label>
-                <select multiple name="Status">
+                <select multiple name="Status" id="Status">
                     <option value="ac">Solved</option>
                     <option value="notac">Attempted</option>
                     <option value="null">Not Attempted</option>
@@ -39,16 +41,16 @@
             <div class="switch">
                 <label>
                     Premium subscription
-                  <input type="checkbox" name="Premium" value="Premium">
+                  <input type="checkbox" name="Premium" value="Premium" id="Premium">
                   <span class="lever"></span>
                 </label>
-              </div>
+            </div>
             
 
             <br>
 
             <label for="numberOfLeetcode">How many LeetCode do you want to do?</label>
-            <input type="number" name="numberOfLeetcode" min="1" value="1">
+            <input type="number" name="numberOfLeetcode" id="numberOfLeetcode" min="1" value="1">
 
             <br>
 

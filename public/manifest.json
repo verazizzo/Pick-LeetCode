@@ -13,7 +13,8 @@
     "permissions": [
       "tabs",
       "cookies",
-      "storage"
+      "storage",
+      "scripting"
     ],
     "content_scripts": [
       {
