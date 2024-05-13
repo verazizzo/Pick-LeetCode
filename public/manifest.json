@@ -6,14 +6,24 @@
     "action": {
       "default_popup": "popup.html"
     },
+    "background": {
+      "service_worker": "scripts/service-worker.js",
+      "type": "module"
+    },
     "permissions": [
       "tabs",
-      "cookies"
+      "cookies",
+      "storage",
+      "scripting"
     ],
     "content_scripts": [
       {
-        "matches": ["https://leetcode.com/problemset/"],
+        "matches": ["https://leetcode.com/*"],
         "js": ["scripts/contentScript.js"]
       }
-    ]
+    ],
+    "icons": {
+      "128": "Pick LeetCode icon 128.png"
+    }
+    
   }

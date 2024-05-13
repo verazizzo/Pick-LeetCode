@@ -2,13 +2,19 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="popup.css" />
+        <link rel="stylesheet" href="libraries/materialize.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
     </head>
     <body>
-        <p style="position: center; color: orangered; font-size: 20px; font-weight: 700;">Pick LeetCode</p>
-        <p style="font-size: 15px;">Choose your random LeetCode!</p>
-        <p style="font-size: 15px;">Filters:</p>
+
+        <p style="position: center; color: orangered; font-size: 25px; font-weight: 700;">Pick LeetCode</p>
+        <p style="font-size: 18px; color: rgb(85, 85, 85)">Choose your random LeetCode!</p>
+        <p style="font-size: 18px; color: rgb(85, 85, 85)">Filters:</p>
+        
         <form id="myForm">
+
             <div>
                 <label for="Difficulty">Select Difficulty</label>
                 <select multiple name="Difficulty" id="Difficulty">
@@ -22,7 +28,7 @@
 
             <div>
                 <label for="Status">Select Status</label>
-                <select multiple name="Status">
+                <select multiple name="Status" id="Status">
                     <option value="ac">Solved</option>
                     <option value="notac">Attempted</option>
                     <option value="null">Not Attempted</option>
@@ -31,32 +37,41 @@
 
             <br>
 
-            <label for="Premium">Premium subscription</label>
-            <label class="switch">
-                <input type="checkbox" name="Premium" value="Premium">
-                <span class="slider round"></span>
-            </label>
+            
+            <div class="switch">
+                <label>
+                    Premium subscription
+                  <input type="checkbox" name="Premium" value="Premium" id="Premium">
+                  <span class="lever"></span>
+                </label>
+            </div>
+            
 
             <br>
 
             <label for="numberOfLeetcode">How many LeetCode do you want to do?</label>
-            <input type="number" name="numberOfLeetcode" min="1" value="1">
+            <input type="number" name="numberOfLeetcode" id="numberOfLeetcode" min="1" value="1">
 
             <br>
 
-            <div id="Topics">
-                <label for="Topics">Select Topics:</label>
-                <br>
-                
+            <div>
+                <label for="Topics">Select Topics</label>
+                <select multiple id="Topics" > 
+                    <option id="SelectAll" value="Select All">Select All</option>
+                </select>
             </div>
 
             <br>
 
             <div>
-                <button type="reset">Reset</button>
-                <button type="submit" value="Submit">Submit</button>
+                <button class="btn waves-effect waves-light" type="reset" name="reset">Reset</button>
+                <button class="btn waves-effect waves-light" type="submit" name="submit">Submit</button>
             </div>
+            
         </form>
     </body>
-    <script src="scripts/popup.js"></script>     
+    <script src="scripts/popup.js"></script>  
+    <script src="libraries/jquery.min.js"></script>
+    <script src="libraries/materialize.min.js"></script>
+    <script src="multiselect_init.js"></script>
 </html>
