@@ -26,19 +26,18 @@ function pickRandom (filteredQ : Array<any>, nQuestions : bigint){
 
 
 let formQuestion : formQuestions
+
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         formQuestion = request.formData as formQuestions
-        console.log(formQuestion)
         let filteredQ = filterQuestions(questions, formQuestion)
-        console.log(filteredQ)
+        console.log(filteredQ) 
         pickRandom(filteredQ, formQuestion.numberOfLeetcode)
-    } //TODO: fix edge cases
+    } //TODO: fix edge cases, functions only when the page is on focus
 );
-
 
 let questions : Array<any>
 fetchQuestions().then(output => {
     questions = output
-    console.log(output)
+    console.log(output) //all the Leetcode Problems
 })
