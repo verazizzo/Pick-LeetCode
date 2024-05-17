@@ -76,7 +76,7 @@ function unselectAll (e: Event){
     M.FormSelect.init(TargetElement)
 }
 
-function chekAllSlected(TargetElement: HTMLFormElement){
+function checkAllSlected(TargetElement: HTMLFormElement){
     let all = true
     for (let i = 1; i < TargetElement.length; i++){
         if(TargetElement.options.item(i).selected == false){
@@ -99,7 +99,7 @@ function changeHandler(e: Event){
     } else if(lastSelectAll != changeEventTarget.options.item(0).selected && changeEventTarget.options.item(0).selected == false){
         unselectAll(e)
     } else if(lastSelectAll == changeEventTarget.options.item(0).selected){
-        chekAllSlected(changeEventTarget)
+        checkAllSlected(changeEventTarget)
     }
     lastSelectAll = changeEventTarget.options.item(0).selected
 }
