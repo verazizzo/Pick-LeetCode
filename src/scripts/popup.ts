@@ -1,6 +1,8 @@
 import { formQuestions } from "../types/formQuestions";
 import { submitEventTarget } from "../types/submitEventTarget";
 import { tagList } from "../tagList";
+import { message, messageType } from "../types/message";
+import { Types } from "mongoose";
 
 function createTopicsFilters (){
     tagList.forEach(tagName => {
@@ -51,13 +53,14 @@ async function submitHandler( e: SubmitEvent) {
         "Topics" : valuesSelected(submitEventTarget.Topics.options) as Array<String>
     } 
     formData = setEmptyFiltersToDefault(formData)
-    sendMessage(formData).catch(err=>console.error(err)).then((res)=>console.log(res));
+    let message = {Type: messageType.formPref, Body: formData} as message
+    sendMessage(message).catch(err=>console.error(err)).then((res)=>console.log(res));
 }
 
-async function sendMessage(formData : formQuestions){
+async function sendMessage(message : message){
     const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true})
-    const response_contentS = await chrome.tabs.sendMessage(tab.id ? tab.id : chrome.tabs.TAB_ID_NONE, {formData});
-    const response_serviceW = await chrome.runtime.sendMessage({formData});
+    const response_contentS = await chrome.tabs.sendMessage(tab.id ? tab.id : chrome.tabs.TAB_ID_NONE, {message});
+    const response_serviceW = await chrome.runtime.sendMessage({message});
 }
 
 function selectAll (e: Event){
@@ -148,15 +151,16 @@ function showSavedPreferences(formQuestion: formQuestions){
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        let formQuestion = request.formQuestion as formQuestions
+        let formQuestion = request.message.Body as formQuestions
         showSavedPreferences(formQuestion)
         console.log(formQuestion)
     }
 );
 
 let lastSelectAll = false
+let message = {Type: messageType.popupOpen} as message
 
 createTopicsFilters()
-chrome.runtime.sendMessage("open")
+chrome.runtime.sendMessage(message)
 document.getElementById("myForm")?.addEventListener("submit", (e)=>submitHandler(e))
 document.getElementById("Topics")?.addEventListener("change", (e)=>changeHandler(e))
