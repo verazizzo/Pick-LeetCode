@@ -33,7 +33,7 @@ let formQuestion : formQuestions
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        formQuestion = request.formData as formQuestions
+        formQuestion = request.message.Body as formQuestions
         if (questions!=undefined){
             filterQuestions(questions, formQuestion)
         }
